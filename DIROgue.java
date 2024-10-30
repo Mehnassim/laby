@@ -20,11 +20,11 @@ public class DIROgue {
 		Piece[] piece = new Piece[50];  // Crée un tableau de pièces;
 		Exterieur exterieur = Exterieur.getExterieur();
 		piece[0] = exterieur; // nouveau exterieur dans la piece 0
-		int nombreDePieces = 0; // compteur de piece
+		int nombreDePieces = 1; // compteur de piece
 		String ligne = scan.nextLine(); // Lit la première ligne
-		while (!ligne.equals("FIN")) { // Si la ligne est fin, arrête la boucle
+		while (ligne != "FIN") { // Si la ligne est fin, arrête la boucle
 
-			String[] mots = ligne.split(" "); //sépare les mots
+			String[] mots = ligne.split(" "); //sépare les mots et fait un tableau
 
 			switch (mots[0]) {
 				case "piece":	// Si le premier mot est piece
@@ -61,11 +61,11 @@ public class DIROgue {
 						break;
 					}
 
-					if (Integer.parseInt(mots[1]) == 0) { //si une des pièces est vide
+					if (Integer.parseInt(mots[1]) == 0) { //si une des pièces est exterieur
 						labyrinthe.ajouteEntree(exterieur, piece[Integer.parseInt(mots[2])]); // Ajoute une entrée
 						break;
 					}
-					if (Integer.parseInt(mots[2]) == 0) { //si une des pièces est vide
+					if (Integer.parseInt(mots[2]) == 0) { //si une des pièces est exterieur
 						labyrinthe.ajouteEntree(exterieur, piece[Integer.parseInt(mots[1])]); // Ajoute une entrée
 						break;
 					}
@@ -75,9 +75,9 @@ public class DIROgue {
 
 				case  "CORRIDORS": // Si le premier mot est CORRIDORS
 					boolean corridorCorrect = true;
-					for (int i = 0; i < nombreDePieces + 1; i++){
+					for (int i = 0; i < nombreDePieces; i++){
 						if (piece[i] == null) {
-							System.out.println("piece manquante");
+							System.out.println("piece manquante"); //pour ne pas sauter de piece
 							corridorCorrect = false;
 							break;
 						}
@@ -104,7 +104,7 @@ public class DIROgue {
 
 
 
-		MonAventure aventure = new MonAventure(labyrinthe); // Crée une aventure
+		MonAventure aventure = new MonAventure(labyrinthe); // Crée une aventure avec le labyrinth
 		genererRapport(aventure); // Génère un rapport
 		genererScenario(aventure); // Génère un scénario
 
@@ -209,7 +209,7 @@ public class DIROgue {
 				if (cheminBoss[i].getRencontreType() == RencontreType.TRESOR) { //si la piece a un trésor
 					Tresor x = null;
 					int r = new Random().nextInt(3);
-					switch (r) { //choisi un monstretresors aléatoire
+					switch (r) { //choisi un monstre aléatoire
 						case 0:
 							x = new SacDeButin();
 							break;
