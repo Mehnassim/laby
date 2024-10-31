@@ -22,7 +22,7 @@ public class DIROgue {
 		piece[0] = exterieur; // nouveau exterieur dans la piece 0
 		int nombreDePieces = 1; // compteur de piece
 		String ligne = scan.nextLine(); // Lit la première ligne
-		while (ligne != "FIN") { // Si la ligne est fin, arrête la boucle
+		while (!ligne.equals("FIN")) { // Si la ligne est fin, arrête la boucle
 
 			String[] mots = ligne.split(" "); //sépare les mots et fait un tableau
 
